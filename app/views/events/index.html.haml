@@ -1,0 +1,6 @@
+%h1 Events
+%p
+  = link_to 'New Event', new_event_path
+
+- @events.each do |event|
+  = event.name
