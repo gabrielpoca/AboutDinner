@@ -1,4 +1,7 @@
 class EventsController < ApplicationController
+
+  before_filter :authenticate_user!, :except => [:index]
+
   def index
     @events = Event.find :all
   end
