@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120508235425) do
+ActiveRecord::Schema.define(:version => 20120509160728) do
 
   create_table "dinner_likes", :force => true do |t|
     t.integer  "dinner_id"
@@ -31,15 +31,15 @@ ActiveRecord::Schema.define(:version => 20120508235425) do
 
   add_index "dinners", ["event_id"], :name => "index_dinners_on_event_id"
 
+  create_table "event_users", :id => false, :force => true do |t|
+    t.integer "event_id"
+    t.integer "user_id"
+  end
+
   create_table "events", :force => true do |t|
     t.string   "name",       :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-  end
-
-  create_table "events_users", :id => false, :force => true do |t|
-    t.integer "event_id"
-    t.integer "user_id"
   end
 
   create_table "places", :force => true do |t|

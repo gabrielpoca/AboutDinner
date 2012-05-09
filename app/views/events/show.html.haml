@@ -2,3 +2,14 @@
 %h1
   = @event.name
 
+%p
+  - @users.each do |user|
+    = user.email
+    
+%p
+  - @places.each do |place|
+    = place.name
+
+%p
+  - @dinners.each do |dinner|
+    = dinner.name

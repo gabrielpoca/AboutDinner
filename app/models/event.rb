@@ -1,4 +1,5 @@
 class Event < ActiveRecord::Base
   validates :name, :presence => 'true'
-  has_and_belongs_to_many :User
+  has_many :EventUser
+  has_many :User, :through => :EventUser
 end

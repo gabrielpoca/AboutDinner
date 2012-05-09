@@ -12,10 +12,18 @@ class EventsController < ApplicationController
     if @event.save
       # save users
       params[:users].split(',').each do |user_mail|
-        user = User.where(:email => user_mail)
-        if user
-          EventsUsers.create :user_id => user.id, :event_id => @event.id
+        tmp_user = User.where(:email => user_mail).first
+        if tmp_user
+          EventUser.create :user_id => tmp_user.id, :event_id => @event.id
         end
+      end
+      # save place
+      params[:places].split(',').each do |place|
+        Place.create :event_id => @event.id, :name => place, :time => Time.now
+      end
+      # save dinners
+      params[:dinners].split(',').each do |dinner|
+        Dinner.create :event_id => @event.id, :name => dinner
       end
       redirect_to :action => :show, :id => @event.id
     else
@@ -28,9 +36,10 @@ class EventsController < ApplicationController
   end
 
   def show
-    #@event = Event.find params[:id]
-    @event = Event.find(params[:id], :include => [:User])
-    debugger
+    @event = Event.find params[:id]
+    @users = User.includes(:Event).where('events.id = '+params[:id])
+    @places = Place.includes(:Event).where('events.id = '+params[:id])
+    @dinners = Dinner.includes(:Event).where('events.id = '+params[:id])
   end
 
   def edit
