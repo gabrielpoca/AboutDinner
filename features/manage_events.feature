@@ -8,7 +8,7 @@ Feature: Manage Events
 		Then I should see "New Event" in the selector "h1"
 
 	Scenario: Create New Event
-		Given User with email "cette118@gmail.com" is registered
+		Given Email "cette118@gmail.com" is registered
 		And I'm in "/events/new"
 		When I fill in "name" with "Novo Evento"
 		And I fill in "users" with "cette118@gmail.com"

@@ -2,15 +2,8 @@ Given /^I'm in "([^"]*)"$/ do |page|
   visit page
 end
 
-Given /^User with email "([^"]*)" is registered$/ do |mail|
-
-  step 'I\'m in "/users/sign_up"'
-  step 'I fill in "user_name" with "Gabriel"'
-  step 'I fill in "user_email" with "#{mail}"'
-  step 'I fill in "user_password" with "password"'
-  step 'I fill in "user_password_confirmation" with "password"'
-  step 'I click "Sign up"'
-  
+Given /^Email "([^"]*)" is registered$/ do |mail|
+  User.create! :name => 'name', :email => mail, :password => 'password'
 end
 
 When /^I click "([^"]*)"$/ do |text|

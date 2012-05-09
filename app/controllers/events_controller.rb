@@ -28,8 +28,9 @@ class EventsController < ApplicationController
   end
 
   def show
-    @event = Event.find params[:id]
-    @users = Event.find(params[:id]).User
+    #@event = Event.find params[:id]
+    @event = Event.find(params[:id], :include => [:User])
+    debugger
   end
 
   def edit
