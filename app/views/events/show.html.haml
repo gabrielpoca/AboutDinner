@@ -1,2 +1,8 @@
+
 %h1
   = @event.name
+
+%p
+  - @users.each do |user|
+    = user.email
+
