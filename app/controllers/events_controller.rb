@@ -47,5 +47,18 @@ class EventsController < ApplicationController
   end
 
   def edit
+    @event = Event.find params[:id]
+  end
+
+  def update
+    @event = Event.find params[:id]
+    debugger
+    if @event.update_attributes(params[:event])
+      flash[:notice] = 'Event saved!'
+      redirect_to :action => :show, :id => @vent.id
+    else
+      flash[:notice] = 'Event could not be saved!'
+      redirect_to :action => :index
+    end
   end
 end

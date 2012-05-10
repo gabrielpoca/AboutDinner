@@ -12,7 +12,7 @@ Aboutdinner::Application.routes.draw do
 #
 #  get "events/edit"
 #
-#  resources :events
+  resources :events
   
   root :to => 'events#index'
 
