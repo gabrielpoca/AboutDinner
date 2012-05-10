@@ -9,7 +9,7 @@ Feature: Manage Events
 
 	Scenario: Create New Event
 		Given Email "cette118@gmail.com" is registered
-		And I'm in "/events/new"
+		And I'm in "events_path"
 		When I fill in "name" with "Novo Evento"
 		And I fill in "users" with "cette118@gmail.com"
 		And I fill in "places" with "Braga"
@@ -19,3 +19,12 @@ Feature: Manage Events
 		And I should see "cette118@gmail.com"
 		And I should see "Braga"
 		And I should see "Coisas boas"
+
+	Scenario: Edit Event
+		Given Event "Novo Evento" is registered
+		And I'm in "/events"
+		When I click "Novo Evento"
+		And I click "Edit"
+		And I fill in "users" with "novoemail@gmail.com"
+		And I click "Save"
+		Then I should see "novoemail@gmail.com"

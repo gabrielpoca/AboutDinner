@@ -6,6 +6,10 @@ Given /^Email "([^"]*)" is registered$/ do |mail|
   User.create! :name => 'name', :email => mail, :password => 'password'
 end
 
+Given /^Event "([^"]*)" is registered$/ do |name|
+  Event.create! :name => name
+end
+
 When /^I click "([^"]*)"$/ do |text|
   click_on text
 end

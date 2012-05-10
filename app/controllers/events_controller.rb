@@ -36,10 +36,14 @@ class EventsController < ApplicationController
   end
 
   def show
-    @event = Event.find params[:id]
-    @users = User.includes(:Event).where('events.id = '+params[:id])
-    @places = Place.includes(:Event).where('events.id = '+params[:id])
-    @dinners = Dinner.includes(:Event).where('events.id = '+params[:id])
+    if params[:id]
+      @event = Event.find params[:id]
+      @users = User.includes(:Event).where('events.id = '+params[:id])
+      @places = Place.includes(:Event).where('events.id = '+params[:id])
+      @dinners = Dinner.includes(:Event).where('events.id = '+params[:id])
+    elsif
+      redirect_to :action => :index
+    end
   end
 
   def edit
