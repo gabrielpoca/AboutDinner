@@ -1,6 +1,6 @@
 %h1 Edit Event
 
-= form_tag :controller => :events, :action => :update, :method => "post"
+= form_tag event_path, :method => :put
 
 = label_tag :name, "Name"
 = text_field_tag :name, :value => @event.name
