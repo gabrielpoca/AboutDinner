@@ -1,16 +1,28 @@
 %h1 New Event
-= form_tag events_path, :method => "post"
+= form_for :event, :url => {:action => :create} do |event_form|
+  %div
+    = event_form.label :name, "Event Name: "
+    = event_form.text_field :name
 
-= label_tag :name, "Name"
-= text_field_tag :name
+  = event_form.fields_for :user do |user_form|
+    %p
+      %div
+        = user_form.label :email, 'Email: '
+        = user_form.text_field :email
 
-= label_tag :user, "Users"
-= text_field_tag :users
+  = event_form.fields_for :place do |place_form|
+    %p
+      %div
+        = place_form.label :name, 'Place: '
+        = place_form.text_field :name
+      %div
+        = place_form.label :time, 'Time: '
+        = place_form.datetime_select :time
 
-= label_tag :places, "Places"
-= text_field_tag :places
+  = event_form.fields_for :dinner do |dinner_form|
+    %p
+      %div
+        = dinner_form.label :name, 'Dinner: '
+        = dinner_form.text_field :name
 
-= label_tag :dinners, "Dinners"
-= text_field_tag :dinners
-
-= submit_tag "Create"
+  = event_form.submit 'Create'

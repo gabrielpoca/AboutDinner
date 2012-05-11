@@ -5,9 +5,10 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :name
-  has_many :EventUser
-  has_many :Event, :through => :EventUser
-  has_many :DinnerLike
-  has_many :User, :through => :DinnerLike
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :id
+  has_many :event_user
+  has_many :event, :through => :event_user
+  has_many :dinner_like
+  has_many :dinner, :through => :dinner_like
+  accepts_nested_attributes_for :event, :dinner, :event_user, :dinner_like
 end

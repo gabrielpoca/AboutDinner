@@ -6,8 +6,10 @@ Given /^Email "([^"]*)" is registered$/ do |mail|
   User.create! :name => 'name', :email => mail, :password => 'password'
 end
 
-Given /^Event "([^"]*)" is registered$/ do |name|
-  Event.create! :name => name
+Given /^Event "([^"]*)" is registered with user "([^"]*)"$/ do |event, user|
+  e = Event.new :name => event
+  e.user_attributes = [{ :name => user, :email => user, :password => user }]
+  e.save
 end
 
 When /^I click "([^"]*)"$/ do |text|
@@ -16,6 +18,10 @@ end
 
 When /^I fill in "([^"]*)" with "([^"]*)"$/ do |element, text|
   fill_in element, :with => text
+end
+
+When /^I select "([^"]*)" in "([^"]*)"$/ do |value, field|
+  select value, :from => field
 end
 
 Then /^I should see "([^"]*)" in the selector "([^"]*)"$/ do |text, element|

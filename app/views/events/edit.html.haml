@@ -1,17 +1,14 @@
 %h1 Edit Event
 
-= form_tag event_path, :method => :put
+= form_for @event do |event_form|
+  %div
+    = event_form.label :name, "Event Name: "
+    = event_form.text_field :name
 
-= label_tag :name, "Name"
-= text_field_tag :name, :value => @event.name
+  - event_form.fields_for :User do |user_form|
+    %p
+      %div
+        = user_form.label :email, 'Email: '
+        = user_form.text_field :email
 
-= label_tag :user, "Users"
-= text_field_tag :users
-
-= label_tag :places, "Places"
-= text_field_tag :places
-
-= label_tag :dinners, "Dinners"
-= text_field_tag :dinners
-
-= submit_tag "Save"
+  = event_form.submit

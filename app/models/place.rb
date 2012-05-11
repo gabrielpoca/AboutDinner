@@ -1,3 +1,3 @@
 class Place < ActiveRecord::Base
-  belongs_to :Event
+  belongs_to :event
 end

@@ -8,23 +8,26 @@ class EventsController < ApplicationController
 
   def create
     # save event
-    @event = Event.new :name => params[:name]
+    @event = Event.new(:name => params[:event][:name])
+    @event.user << User.find_by_email(params[:event][:user][:email])
+    debugger
+    @event.place << Place.create(:name => params[:event][:place][:name])
     if @event.save
-      # save users
-      params[:users].split(',').each do |user_mail|
-        tmp_user = User.where(:email => user_mail).first
-        if tmp_user
-          EventUser.create :user_id => tmp_user.id, :event_id => @event.id
-        end
-      end
-      # save place
-      params[:places].split(',').each do |place|
-        Place.create :event_id => @event.id, :name => place, :time => Time.now
-      end
-      # save dinners
-      params[:dinners].split(',').each do |dinner|
-        Dinner.create :event_id => @event.id, :name => dinner
-      end
+#      # save users
+#      params[:users].split(',').each do |user_mail|
+#        tmp_user = User.where(:email => user_mail).first
+#        if tmp_user
+#          EventUser.create :user_id => tmp_user.id, :event_id => @event.id
+#        end
+#      end
+#      # save place
+#      params[:places].split(',').each do |place|
+#        Place.create :event_id => @event.id, :name => place, :time => Time.now
+#      end
+#      # save dinners
+#      params[:dinners].split(',').each do |dinner|
+#        Dinner.create :event_id => @event.id, :name => dinner
+#      end
       redirect_to :action => :show, :id => @event.id
     else
       render :action => 'new'
@@ -38,9 +41,9 @@ class EventsController < ApplicationController
   def show
     if params[:id]
       @event = Event.find params[:id]
-      @users = User.includes(:Event).where('events.id = '+params[:id])
-      @places = Place.includes(:Event).where('events.id = '+params[:id])
-      @dinners = Dinner.includes(:Event).where('events.id = '+params[:id])
+      @users = User.includes(:event).where('events.id = '+params[:id])
+      @places = Place.includes(:event).where('events.id = '+params[:id])
+      @dinners = Dinner.includes(:event).where('events.id = '+params[:id])
     elsif
       redirect_to :action => :index
     end
@@ -52,7 +55,6 @@ class EventsController < ApplicationController
 
   def update
     @event = Event.find params[:id]
-    debugger
     if @event.update_attributes(params[:event])
       flash[:notice] = 'Event saved!'
       redirect_to :action => :show, :id => @vent.id
