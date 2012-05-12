@@ -10,24 +10,27 @@ class EventsController < ApplicationController
     # save event
     @event = Event.new(:name => params[:event][:name])
     @event.user << User.find_by_email(params[:event][:user][:email])
-    debugger
-    @event.place << Place.create(:name => params[:event][:place][:name])
+    # Get Time
+    time =  DateTime.new(params[:event][:place]["time(1i)"].to_i, params[:event][:place]["time(2i)"].to_i, params[:event][:place]["time(3i)"].to_i, params[:event][:place]["time(4i)"].to_i, params[:event][:place]["time(5i)"].to_i)
+    # New Place
+    @event.place << Place.create(:name => params[:event][:place][:name], :time => time.to_s)
+    #@event.place << Place.create(:name => params[:event][:place][:name], :time => params[:event][:place][:time])
     if @event.save
-#      # save users
-#      params[:users].split(',').each do |user_mail|
-#        tmp_user = User.where(:email => user_mail).first
-#        if tmp_user
-#          EventUser.create :user_id => tmp_user.id, :event_id => @event.id
-#        end
-#      end
-#      # save place
-#      params[:places].split(',').each do |place|
-#        Place.create :event_id => @event.id, :name => place, :time => Time.now
-#      end
-#      # save dinners
-#      params[:dinners].split(',').each do |dinner|
-#        Dinner.create :event_id => @event.id, :name => dinner
-#      end
+      #      # save users
+      #      params[:users].split(',').each do |user_mail|
+      #        tmp_user = User.where(:email => user_mail).first
+      #        if tmp_user
+      #          EventUser.create :user_id => tmp_user.id, :event_id => @event.id
+      #        end
+      #      end
+      #      # save place
+      #      params[:places].split(',').each do |place|
+      #        Place.create :event_id => @event.id, :name => place, :time => Time.now
+      #      end
+      #      # save dinners
+      #      params[:dinners].split(',').each do |dinner|
+      #        Dinner.create :event_id => @event.id, :name => dinner
+      #      end
       redirect_to :action => :show, :id => @event.id
     else
       render :action => 'new'

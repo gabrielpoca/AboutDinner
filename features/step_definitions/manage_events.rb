@@ -20,8 +20,9 @@ When /^I fill in "([^"]*)" with "([^"]*)"$/ do |element, text|
   fill_in element, :with => text
 end
 
-When /^I select "([^"]*)" in "([^"]*)"$/ do |value, field|
-  select value, :from => field
+When /^I select date and time "([^"]*)" in "([^"]*)"$/ do |value, field|
+  e = DateTime.parse(value)
+  select_datetime(e.to_s, :from => field)
 end
 
 Then /^I should see "([^"]*)" in the selector "([^"]*)"$/ do |text, element|
