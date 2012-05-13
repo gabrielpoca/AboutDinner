@@ -1,0 +1,10 @@
+%h1 Add User
+= form_for :event, :url => {:action => :add_user} do |event_form|
+
+  = event_form.fields_for :user do |user_form|
+    %p
+      %div
+        = user_form.label :email, 'Email: '
+        = user_form.text_field :email
+
+  = event_form.submit 'Add'

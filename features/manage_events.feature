@@ -26,6 +26,18 @@ Feature: Manage Events
 		And I'm in "/events"
 		When I click "Novo Evento"
 		And I click "Edit"
-		And I fill in "email" with "novoemail@gmail.com"
+		And I fill in "event_name" with "Novo Nome do Evento"
 		And I click "Save"
-		Then I should see "novoemail@gmail.com"
+		Then I should see "Novo Nome do Evento"
+
+	Scenario: Add User To Event
+		Given Event "Evento" is registered with user "mais@gmail.com"
+		Given Email "eu@gmail.com" is registered
+		And I'm in "/events"
+		When I click "Evento"
+		And I click "Edit"
+		And I click "Add User"
+		And I fill in "event_user_email" with "eu@gmail.com"
+		And I click "Add"
+		Then I should see "eu@gmail.com"
+		And I should see "Evento"

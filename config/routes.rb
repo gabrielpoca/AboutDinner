@@ -12,6 +12,10 @@ Aboutdinner::Application.routes.draw do
 #
 #  get "events/edit"
 #
+  
+
+  match "/events/add_user/:id", :controller => 'events', :action => 'add_user'
+
   resources :events
   
   root :to => 'events#index'

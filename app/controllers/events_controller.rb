@@ -25,24 +25,24 @@ class EventsController < ApplicationController
     # New Dinner
     @event.dinner << Dinner.create(:name => params[:event][:dinner][:name])
     if @event.save
-      #      # save users
-      #      params[:users].split(',').each do |user_mail|
-      #        tmp_user = User.where(:email => user_mail).first
-      #        if tmp_user
-      #          EventUser.create :user_id => tmp_user.id, :event_id => @event.id
-      #        end
-      #      end
-      #      # save place
-      #      params[:places].split(',').each do |place|
-      #        Place.create :event_id => @event.id, :name => place, :time => Time.now
-      #      end
-      #      # save dinners
-      #      params[:dinners].split(',').each do |dinner|
-      #        Dinner.create :event_id => @event.id, :name => dinner
-      #      end
       redirect_to :action => :show, :id => @event.id
     else
       render :action => 'new'
+    end
+  end
+
+  def add_user
+    unless params[:event].nil?
+      # get event
+      event = Event.find params[:id]
+      # check and add user
+      tmp_user = User.find_by_email(params[:event][:user][:email])
+      if tmp_user
+        event.user << tmp_user
+      else 
+        flash[:message] = "User "+params[:event][:user][:email]+" not found!"
+      end
+      redirect_to :action => :show, :id => params[:id]
     end
   end
 
@@ -69,7 +69,7 @@ class EventsController < ApplicationController
     @event = Event.find params[:id]
     if @event.update_attributes(params[:event])
       flash[:notice] = 'Event saved!'
-      redirect_to :action => :show, :id => @vent.id
+      redirect_to :action => :show, :id => @event.id
     else
       flash[:notice] = 'Event could not be saved!'
       redirect_to :action => :index

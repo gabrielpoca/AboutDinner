@@ -5,10 +5,6 @@
     = event_form.label :name, "Event Name: "
     = event_form.text_field :name
 
-  - event_form.fields_for :User do |user_form|
-    %p
-      %div
-        = user_form.label :email, 'Email: '
-        = user_form.text_field :email
+  = link_to 'Add User', :controller => 'events', :action => 'add_user', :id => @event.id
 
-  = event_form.submit
+  = event_form.submit 'Save'
