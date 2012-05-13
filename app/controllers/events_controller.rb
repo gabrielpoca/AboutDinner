@@ -39,12 +39,38 @@ class EventsController < ApplicationController
       tmp_user = User.find_by_email(params[:event][:user][:email])
       if tmp_user
         event.user << tmp_user
+        event.save
       else 
         flash[:message] = "User "+params[:event][:user][:email]+" not found!"
       end
       redirect_to :action => :show, :id => params[:id]
     end
   end
+
+  def add_dinner
+    unless params[:event].nil?
+      # get event
+      event = Event.find params[:id]
+
+      event.dinner << Dinner.create(:name => params[:event][:dinner][:name])
+      event.save
+
+      redirect_to :action => :show, :id => params[:id]
+    end
+  end
+
+  def add_place
+    unless params[:event].nil?
+      # get event
+      event = Event.find params[:id]
+
+      time =  DateTime.new(params[:event][:place]["time(1i)"].to_i, params[:event][:place]["time(2i)"].to_i, params[:event][:place]["time(3i)"].to_i, params[:event][:place]["time(4i)"].to_i, params[:event][:place]["time(5i)"].to_i)
+    # New Place
+      event.place << Place.create(:name => params[:event][:place][:name], :time => time.to_s)
+
+      redirect_to :action => :show, :id => params[:id]
+    end
+  end  
 
   def new
     @event = Event.new

@@ -40,4 +40,17 @@ Feature: Manage Events
 		And I fill in "event_user_email" with "eu@gmail.com"
 		And I click "Add"
 		Then I should see "eu@gmail.com"
+		And I should see "mais@gmail.com"
+		And I should see "Evento"
+
+	Scenario: Add Dinner To Event
+		Given Event "Evento" is registered with user "mais@gmail.com"
+		And I'm in "/events"
+		When I click "Evento"
+		And I click "Edit"
+		And I click "Add Dinner"
+		And I fill in "event_dinner_name" with "Coisas Boas"
+		And I click "Add"
+		Then I should see "Coisas Boas"
+		And I should see "mais@gmail.com"
 		And I should see "Evento"

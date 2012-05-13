@@ -1,0 +1,10 @@
+%h1 Add Dinner
+= form_for :event, :url => {:action => :add_dinner} do |event_form|
+
+  = event_form.fields_for :dinner do |dinner_form|
+    %p
+      %div
+        = dinner_form.label :name, 'Dinner: '
+        = dinner_form.text_field :name
+
+  = event_form.submit 'Add'
