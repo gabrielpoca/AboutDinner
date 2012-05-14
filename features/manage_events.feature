@@ -54,3 +54,16 @@ Feature: Manage Events
 		Then I should see "Coisas Boas"
 		And I should see "mais@gmail.com"
 		And I should see "Evento"
+
+	Scenario: Add Place To Event
+		Given Event "Evento" is registered with user "mais@gmail.com"
+		And I'm in "/events"
+		When I click "Evento"
+		And I click "Edit"
+		And I click "Add Place"
+		And I fill in "event_place_name" with "Braga"
+		And I select date and time "1/6/2012 14:30" in "Time"
+		And I click "Add"
+		Then I should see "Braga"
+		And I should see "mais@gmail.com"
+		And I should see "Evento"

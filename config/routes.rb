@@ -16,6 +16,7 @@ Aboutdinner::Application.routes.draw do
 
   match "/events/add_user/:id", :controller => 'events', :action => 'add_user'
   match "/events/add_dinner/:id", :controller => 'events', :action => 'add_dinner'
+  match "/events/add_place/:id", :controller => 'events', :action => 'add_place'
 
   resources :events
   

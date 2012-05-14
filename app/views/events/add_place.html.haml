@@ -1,0 +1,13 @@
+%h1 Add Dinner
+= form_for :event, :url => {:action => :add_place} do |event_form|
+
+  = event_form.fields_for :place do |place_form|
+    %p
+      %div
+        = place_form.label :name, 'Place: '
+        = place_form.text_field :name
+      %div
+        = place_form.label :time, 'Time: '
+        = place_form.datetime_select :time
+
+  = event_form.submit 'Add'
