@@ -67,3 +67,12 @@ Feature: Manage Events
 		Then I should see "Braga"
 		And I should see "mais@gmail.com"
 		And I should see "Evento"
+
+	Scenario: Edit Event Name
+		Given Event "Evento" is registered with user "mais@gmail.com"
+		And I'm in "/events"
+		When I click "Evento"
+		And I click "Edit"
+		And I fill in "event_name" with "Novo Nome"
+		And I click "Save"
+		Then I should see "Novo Nome"
