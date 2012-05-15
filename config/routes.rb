@@ -1,18 +1,6 @@
 Aboutdinner::Application.routes.draw do
-  devise_for :users
 
-#
-#  get "events/index"
-#
-#  get "events/create"
-#
-#  post "events/create"
-#
-#  get "events/show"
-#
-#  get "events/edit"
-#
-  
+  devise_for :users
 
   match "/events/add_user/:id", :controller => 'events', :action => 'add_user'
   match "/events/add_dinner/:id", :controller => 'events', :action => 'add_dinner'

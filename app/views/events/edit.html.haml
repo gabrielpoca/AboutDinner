@@ -5,6 +5,15 @@
     = event_form.label :name, "Event Name: "
     = event_form.text_field :name
 
+  - @event.user.each do |user|
+    %div
+      %table
+        %tr
+          %td
+            user.name
+          %td
+            = link_to "Remove", :controller => 'events', :action => 'remove_user', :event_id => @event.id, :user_id => user.id
+
   = link_to 'Add User', :controller => 'events', :action => 'add_user', :id => @event.id
 
   = link_to 'Add Dinner', :controller => 'events', :action => 'add_dinner', :id => @event.id

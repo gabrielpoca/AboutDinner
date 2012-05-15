@@ -12,6 +12,12 @@ Given /^Event "([^"]*)" is registered with user "([^"]*)"$/ do |event, user|
   e.save
 end
 
+When /^I delete "([^"]*)"$/ do |value|
+  within(value) do
+    click_on("Delete")
+  end
+end
+
 When /^I click "([^"]*)"$/ do |text|
   click_on text
 end
