@@ -38,3 +38,7 @@ end
 Then /^I should see "([^"]*)"$/ do |text|
   page.should have_content text
 end
+
+Then /^I should not see "([^"]*)"$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end

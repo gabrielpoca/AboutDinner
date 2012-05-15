@@ -47,6 +47,19 @@ class EventsController < ApplicationController
     end
   end
 
+  def remove_user
+    unless params[:event_id].nil?
+      user = User.find params[:user_id]
+      event = Event.find params[:event_id]
+      event.user.delete user
+      flash[:notice] = "User removed"
+      redirect_to :action => :show, :id => params[:event_id]
+    else
+      flash[:notice] = "Error removing user"
+      redirect_to :action => :index
+    end
+  end
+
   def add_dinner
     unless params[:event].nil?
       # get event
@@ -78,7 +91,7 @@ class EventsController < ApplicationController
 
   def show
     if params[:id]
-      @event = Event.find params[:id]
+      @event = Event.find(params[:id])
       @users = User.includes(:event).where('events.id = '+params[:id])
       @places = Place.includes(:event).where('events.id = '+params[:id])
       @dinners = Dinner.includes(:event).where('events.id = '+params[:id])

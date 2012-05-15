@@ -10,7 +10,7 @@
       %table
         %tr
           %td
-            user.name
+            = user.email
           %td
             = link_to "Remove", :controller => 'events', :action => 'remove_user', :event_id => @event.id, :user_id => user.id
 
