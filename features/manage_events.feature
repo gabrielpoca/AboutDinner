@@ -82,7 +82,7 @@ Feature: Manage Events
 		And I'm in "/events"
 		When I click "Evento"
 		And I click "Edit"
-		And I delete "mais@gmail.com"
+		And I click "Remove" on "mais@gmail.com"
 		Then I should not see "mais@gmail.com"
 		And I should see "Evento"
 

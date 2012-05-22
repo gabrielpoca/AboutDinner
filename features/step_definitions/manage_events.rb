@@ -12,12 +12,6 @@ Given /^Event "([^"]*)" is registered with user "([^"]*)"$/ do |event, user|
   e.save
 end
 
-When /^I delete "([^"]*)"$/ do |value|
-  within(value) do
-    click_on("Delete")
-  end
-end
-
 When /^I click "([^"]*)"$/ do |text|
   click_on text
 end
@@ -29,6 +23,10 @@ end
 When /^I select date and time "([^"]*)" in "([^"]*)"$/ do |value, field|
   e = DateTime.parse(value)
   select_datetime(e.to_s, :from => field)
+end
+
+When /^I click "([^"]*)" on "([^"]*)"$/ do |link, field|
+  find('tr', :text => field).click_link(link)
 end
 
 Then /^I should see "([^"]*)" in the selector "([^"]*)"$/ do |text, element|
