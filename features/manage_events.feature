@@ -2,6 +2,10 @@ Feature: Manage Events
 	In order to manage events
 	I should be able to manage events
 
+	Background:
+		Given default user is registered
+		And I'm logged in as default user
+
 	Scenario: Visit New Event Page
 		Given I'm in "/"
 		When I click "New Event"
