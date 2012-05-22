@@ -1,13 +1,14 @@
 Given /^default user is registered$/ do
-  @user = User.create! :name => 'Gabriel', :email => 'eu@gmail.com', :password => 'password', :password_confirmation => 'password'
+  @user = User.create! :name => 'Teste', :email => 'teste@gmail.com', :password => 'password', :password_confirmation => 'password'
 end
 
 Given /^I'm logged in as default user$/ do
   visit '/users/sign_out'
   visit '/users/sign_in'
-  fill_in "user_email", :with => @user[:email]
-  fill_in "user_password", :with => @user[:password]
+  fill_in "user_email", :with => 'teste@gmail.com'
+  fill_in "user_password", :with => 'password'
   click_button "Sign in"  
+  page.should have_content("Signed in successfully.")  
 end
 
 Given /^I'm in "([^"]*)"$/ do |page|
