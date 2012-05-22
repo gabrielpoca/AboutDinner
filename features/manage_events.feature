@@ -94,3 +94,12 @@ Feature: Manage Events
 		And I click "Remove" on "Lugar"
 		Then I should not see "Lugar"
 		And I should see "Evento"
+
+	Scenario: Remove Dinner From Event
+		Given Event "Evento" is registered with dinner "Coisas boas"
+		And I'm in "/events"
+		When I click "Evento"
+		And I click "Edit"
+		And I click "Remove" on "Coisas boas"
+		Then I should not see "Coisas boas"
+		And I should see "Evento"

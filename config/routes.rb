@@ -8,6 +8,7 @@ Aboutdinner::Application.routes.draw do
 
   match "/events/remove_user/:event_id/:user_id", :controller => 'events', :action => 'remove_user'
   match "/events/remove_place/:event_id/:place_id", :controller => 'events', :action => 'remove_place'
+  match "/events/remove_dinner/:event_id/:dinner_id", :controller => 'events', :action => 'remove_dinner'
 
   resources :events
   

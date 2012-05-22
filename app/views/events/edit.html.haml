@@ -23,6 +23,15 @@
           %td
             = link_to "Remove", :controller => 'events', :action => 'remove_place', :event_id => @event.id, :place_id => place.id
 
+  - @event.dinner.each do |dinner|
+    %div
+      %table
+        %tr
+          %td
+            = dinner.name
+          %td
+            = link_to "Remove", :controller => 'events', :action => 'remove_dinner', :event_id => @event.id, :dinner_id => dinner.id
+
   = link_to 'Add User', :controller => 'events', :action => 'add_user', :id => @event.id
 
   = link_to 'Add Dinner', :controller => 'events', :action => 'add_dinner', :id => @event.id

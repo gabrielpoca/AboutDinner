@@ -18,6 +18,12 @@ Given /^Event "([^"]*)" is registered with place "([^"]*)"$/ do |event, place|
   e.save
 end
 
+Given /^Event "([^"]*)" is registered with dinner "([^"]*)"$/ do |event, dinner|
+  e = Event.new :name => event
+  e.dinner_attributes = [{ :name => dinner }]
+  e.save
+end
+
 When /^I click "([^"]*)"$/ do |text|
   click_on text
 end
