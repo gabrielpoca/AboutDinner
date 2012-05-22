@@ -12,6 +12,12 @@ Given /^Event "([^"]*)" is registered with user "([^"]*)"$/ do |event, user|
   e.save
 end
 
+Given /^Event "([^"]*)" is registered with place "([^"]*)"$/ do |event, place|
+  e = Event.new :name => event
+  e.place_attributes = [{ :name => place, :time => Time.now }]
+  e.save
+end
+
 When /^I click "([^"]*)"$/ do |text|
   click_on text
 end

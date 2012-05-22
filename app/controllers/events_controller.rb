@@ -60,6 +60,19 @@ class EventsController < ApplicationController
     end
   end
 
+  def remove_place
+    unless params[:event_id].nil?
+      event = Event.find params[:event_id]
+      place = Place.find params[:place_id]
+      event.place.delete place
+      flash[:notice] = "Place removed"
+      redirect_to :action => :show, :id => params[:event_id]
+    else
+      flash[:notice] = "Error removing place"
+      redirect_to :action => :index
+    end
+  end
+
   def add_dinner
     unless params[:event].nil?
       # get event

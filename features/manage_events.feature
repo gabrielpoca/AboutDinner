@@ -86,3 +86,11 @@ Feature: Manage Events
 		Then I should not see "mais@gmail.com"
 		And I should see "Evento"
 
+	Scenario: Remove Place From Event
+		Given Event "Evento" is registered with place "Lugar"
+		And I'm in "/events"
+		When I click "Evento"
+		And I click "Edit"
+		And I click "Remove" on "Lugar"
+		Then I should not see "Lugar"
+		And I should see "Evento"
