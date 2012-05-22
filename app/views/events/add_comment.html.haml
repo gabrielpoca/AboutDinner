@@ -1,0 +1,10 @@
+%h1 Add Dinner
+= form_for :event, :url => {:action => :add_comment} do |event_form|
+
+  = event_form.fields_for :comment do |comment_form|
+    %p
+      %div
+        = comment_form.label :content, 'Comment: '
+        = comment_form.text_field :content
+
+  = event_form.submit 'Add'

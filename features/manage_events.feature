@@ -103,3 +103,13 @@ Feature: Manage Events
 		And I click "Remove" on "Coisas boas"
 		Then I should not see "Coisas boas"
 		And I should see "Evento"
+
+	Scenario: Add Comment to Event
+		Given Event "Evento" is registered with user "cette118@gmail.com"
+		And I'm in "/events"
+		When I click "Evento"
+		And I click "Edit"
+		And I click "Add Comment"
+		And I fill in "event_comment_content" with "Comentario"
+		And I click "Add"
+		Then I should see "Comentario"

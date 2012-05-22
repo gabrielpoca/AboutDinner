@@ -98,6 +98,18 @@ class EventsController < ApplicationController
     end
   end
 
+  def add_comment
+    unless params[:event].nil?
+      # get event
+      event = Event.find params[:id]
+
+      event.comment << Comment.create(:content => params[:event][:comment][:content], :time => Time.now)
+      event.save
+
+      redirect_to :action => :show, :id => params[:id]
+    end
+  end
+
   def add_place
     unless params[:event].nil?
       # get event
