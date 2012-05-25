@@ -24,3 +24,12 @@ Feature: Manage Users in Events
 		And I fill in "event_user_email" with "novo@mail.com"
 		And I click "Add"
 		Then I should see "novo@mail.com invited"
+
+	Scenario: Remove user
+		Given Event "Evento" is registered with user "mais@gmail.com"
+		And I'm in "/events"
+		When I click "Evento"
+		And I click "Edit"
+		And I click "Remove" on "mais@gmail.com"
+		Then I should not see "mais@gmail.com"
+		And I should see "Evento"

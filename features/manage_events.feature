@@ -25,19 +25,6 @@ Feature: Manage Events
 		And I should see "Braga"
 		And I should see "Coisas boas"
 
-	Scenario: Add User To Event
-		Given Event "Evento" is registered with user "mais@gmail.com"
-		Given Email "eu@gmail.com" is registered
-		And I'm in "/events"
-		When I click "Evento"
-		And I click "Edit"
-		And I click "Add User"
-		And I fill in "event_user_email" with "eu@gmail.com"
-		And I click "Add"
-		Then I should see "eu@gmail.com"
-		And I should see "mais@gmail.com"
-		And I should see "Evento"
-
 	Scenario: Add Dinner To Event
 		Given Event "Evento" is registered with user "mais@gmail.com"
 		And I'm in "/events"

@@ -21,7 +21,8 @@ end
 
 Given /^Event "([^"]*)" is registered with user "([^"]*)"$/ do |event, user|
   e = Event.new :name => event
-  e.user_attributes = [{ :name => user, :email => user, :password => user }]
+  password = Devise.friendly_token.first(6) 
+  e.user_attributes = [{ :name => user, :email => user, :password => password, :password_confirmation => password }]
   e.save
 end
 
