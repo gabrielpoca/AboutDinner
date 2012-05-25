@@ -59,15 +59,6 @@ Feature: Manage Events
 		And I click "Save"
 		Then I should see "Novo Nome"
 
-	Scenario: Remove User From Event
-		Given Event "Evento" is registered with user "mais@gmail.com"
-		And I'm in "/events"
-		When I click "Evento"
-		And I click "Edit"
-		And I click "Remove" on "mais@gmail.com"
-		Then I should not see "mais@gmail.com"
-		And I should see "Evento"
-
 	Scenario: Remove Place From Event
 		Given Event "Evento" is registered with place "Lugar"
 		And I'm in "/events"

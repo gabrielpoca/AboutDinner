@@ -38,7 +38,7 @@ Given /^Event "([^"]*)" is registered with dinner "([^"]*)"$/ do |event, dinner|
   e.save
 end
 
-Given /^Event "([^"]*)" is registered$/ do |name|
+Given /^Event "([^"]*)" is registered by default user$/ do |name|
   e = Event.new :name => name
   e.user << @default_user
   e.save

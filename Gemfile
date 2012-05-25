@@ -15,12 +15,14 @@ group :assets do
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer'
-  # 
-  gem 'sqlite3'
-
-
   gem 'uglifier', '>= 1.0.3'
 end
+
+group :production do
+  gem 'pg'
+  gem 'thin'
+end
+
 
 group :development, :test do
   gem 'cucumber-rails', :require => false
@@ -31,6 +33,8 @@ group :development, :test do
   # database_cleaner is not required, but highly recommended
   gem 'database_cleaner'
   gem 'ruby-debug', :require => 'ruby-debug'
+
+  gem 'sqlite3'
 end
 
 gem 'jquery-rails'
