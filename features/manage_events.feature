@@ -1,6 +1,6 @@
 Feature: Manage Events
-	In order to manage events
-	I should be able to manage events
+
+	In order to manage events I should be able to add/remove users, places and dinners.
 
 	Background:
 		Given default user is registered
@@ -24,15 +24,6 @@ Feature: Manage Events
 		And I should see "cette118@gmail.com"
 		And I should see "Braga"
 		And I should see "Coisas boas"
-
-	Scenario: Edit Event
-		Given Event "Novo Evento" is registered with user "cette118@gmail.com"
-		And I'm in "/events"
-		When I click "Novo Evento"
-		And I click "Edit"
-		And I fill in "event_name" with "Novo Nome do Evento"
-		And I click "Save"
-		Then I should see "Novo Nome do Evento"
 
 	Scenario: Add User To Event
 		Given Event "Evento" is registered with user "mais@gmail.com"
