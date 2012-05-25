@@ -8,25 +8,23 @@ Feature: Manage Users in Events
 		And Event "Novo Evento" is registered
 		And I'm in "/events/index"
 
-	Scenario Outline: Add exising user by name and email.
+	Scenario Outline: Add exising user by email.
 		Given User with name "TesteName2" and email "teste@gmail.com" is registered
 		When I click "Novo Evento"
 		And I click "Edit"
 		And I click "Add User"
 		And I fill in "<field>" with "<value>"
 		And And I click "Add"
-		Then I should see "User <value> added"
+		Then I should see "<value> added"
 
 		Examples:
 			| field       | value           |
-			| user_name   | TesteName2      |
 			| user_email  | teste@gmail.com |
 
-	Scenario: Invite non registered user to event.
+	Scenario: Add non exisiting user.
 		When I click "Novo Evento"
 		And I click "Edit"
 		And I click "Add User"
-		And I click "Invite User to App"
-		And I fill in "user_email" with "novoemail@email.com"
-		And I click "Invite"
-		Then I should see "novoemail@email.com invited"
+		And I fill in "user_email" with "novo@mail.com"
+		And I click "Add"
+		Then I should see "novo@mail.com invited"

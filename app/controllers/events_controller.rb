@@ -15,7 +15,7 @@ class EventsController < ApplicationController
     if tmp_user
       @event.user << tmp_user
     else 
-      flash[:message] = "User "+params[:event][:user][:email]+" not found!"
+      flash[:notice] = "User "+params[:event][:user][:email]+" not found!"
     end
 
     time =  DateTime.new(params[:event][:place]["time(1i)"].to_i, params[:event][:place]["time(2i)"].to_i, params[:event][:place]["time(3i)"].to_i, params[:event][:place]["time(4i)"].to_i, params[:event][:place]["time(5i)"].to_i)
@@ -33,17 +33,26 @@ class EventsController < ApplicationController
 
   def add_user
     unless params[:event].nil?
-      # get event
+
+      # find event
       event = Event.find params[:id]
-      # check and add user
+
+      # find user by email
       tmp_user = User.find_by_email(params[:event][:user][:email])
+
       if tmp_user
+        # if user exists add it
         event.user << tmp_user
         event.save
       else 
-        flash[:message] = "User "+params[:event][:user][:email]+" not found!"
+        # if user does not exist invite and add
+        password = Devise.friendly_token.first(6)
+        event.user << User.create!(:email => params[:event][:user][:email], :password => password, :password_confirmation => password)
+        flash[:notice] = params[:event][:user][:email]+" invited"
       end
+
       redirect_to :action => :show, :id => params[:id]
+
     end
   end
 
