@@ -3,7 +3,7 @@ Feature: Manage Events
 	In order to manage events I should be able to add/remove users, places and dinners.
 
 	Background:
-		Given default user is registered
+		Given Default user is registered
 		And I'm logged in as default user
 
 	Scenario: Visit New Event Page

@@ -1,11 +1,11 @@
-Given /^default user is registered$/ do
-  @user = User.create! :name => 'Teste', :email => 'teste@gmail.com', :password => 'password', :password_confirmation => 'password'
+Given /^Default user is registered$/ do
+  @default_user = User.create! :name => 'Teste', :email => 'teste@teste.com', :password => 'password', :password_confirmation => 'password'
 end
 
 Given /^I'm logged in as default user$/ do
   visit '/users/sign_out'
   visit '/users/sign_in'
-  fill_in "user_email", :with => 'teste@gmail.com'
+  fill_in "user_email", :with => 'teste@teste.com'
   fill_in "user_password", :with => 'password'
   click_button "Sign in"  
   page.should have_content("Signed in successfully.")  
@@ -37,6 +37,19 @@ Given /^Event "([^"]*)" is registered with dinner "([^"]*)"$/ do |event, dinner|
   e.save
 end
 
+Given /^Event "([^"]*)" is registered$/ do |name|
+  e = Event.new :name => name
+  e.user << @default_user
+  e.save
+end
+
+Given /^User with name "([^"]*)" and email "([^"]*)" is registered$/ do |name, email|
+  password = Devise.friendly_token.first(6)
+  User.create! :name => name, :email => email, :password => password, :password_confirmation => password
+end
+
+##### WHEN
+
 When /^I click "([^"]*)"$/ do |text|
   click_on text
 end
@@ -53,6 +66,9 @@ end
 When /^I click "([^"]*)" on "([^"]*)"$/ do |link, field|
   find('tr', :text => field).click_link(link)
 end
+
+
+##### THEN
 
 Then /^I should see "([^"]*)" in the selector "([^"]*)"$/ do |text, element|
   page.should have_selector element, :content => text

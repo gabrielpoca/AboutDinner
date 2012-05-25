@@ -44,6 +44,8 @@ class EventsController < ApplicationController
         # if user exists add it
         event.user << tmp_user
         event.save
+
+        flash[:notice] = params[:event][:user][:email]+" added"
       else 
         # if user does not exist invite and add
         password = Devise.friendly_token.first(6)
