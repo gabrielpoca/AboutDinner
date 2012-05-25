@@ -1,11 +1,11 @@
 Given /^Default user is registered$/ do
-  @default_user = User.create! :name => 'Teste', :email => 'teste@teste.com', :password => 'password', :password_confirmation => 'password'
+  @default_user = User.create! :name => 'Default user', :email => 'default@user.com', :password => 'password', :password_confirmation => 'password'
 end
 
 Given /^I'm logged in as default user$/ do
   visit '/users/sign_out'
   visit '/users/sign_in'
-  fill_in "user_email", :with => 'teste@teste.com'
+  fill_in "user_email", :with => 'default@user.com'
   fill_in "user_password", :with => 'password'
   click_button "Sign in"  
   page.should have_content("Signed in successfully.")  

@@ -40,11 +40,10 @@ class EventsController < ApplicationController
       # find user by email
       tmp_user = User.find_by_email(params[:event][:user][:email])
 
-      if tmp_user
+      unless tmp_user.nil?
         # if user exists add it
         event.user << tmp_user
         event.save
-
         flash[:notice] = params[:event][:user][:email]+" added"
       else 
         # if user does not exist invite and add
