@@ -13,5 +13,10 @@
   - @dinners.each do |dinner|
     = dinner.name
 
+%div
+  - @event.comment.each do |comment|
+    %p
+      = comment.content
+
 %p
   = link_to 'Edit', edit_event_path, :id => @event.id
