@@ -130,9 +130,6 @@ class EventsController < ApplicationController
   def show
     if params[:id]
       @event = Event.find(params[:id])
-      @users = User.includes(:event).where('events.id = '+params[:id])
-      @places = Place.includes(:event).where('events.id = '+params[:id])
-      @dinners = Dinner.includes(:event).where('events.id = '+params[:id])
     elsif
       redirect_to :action => :index
     end

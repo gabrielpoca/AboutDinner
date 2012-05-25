@@ -2,7 +2,7 @@
   = @event.name
 
 %p
-  - @users.each do |user|
+  - @event.user.each do |user|
     = user.email
     
 %p
