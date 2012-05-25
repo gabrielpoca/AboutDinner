@@ -4,8 +4,8 @@ Feature: Manage Users in Events
 
 	Background: I should be logged in and there should be an event.
 		Given Default user is registered
+		And Event "Novo Evento" is registered by default user		
 		And I'm logged in as default user
-		And Event "Novo Evento" is registered
 		And I'm in "/events"
 
 	Scenario: Add exising user by email.
