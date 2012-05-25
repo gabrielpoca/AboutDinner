@@ -6,11 +6,11 @@
     = user.email
     
 %p
-  - @places.each do |place|
+  - @event.place.each do |place|
     = place.name
 
 %p
-  - @dinners.each do |dinner|
+  - @event.dinner.each do |dinner|
     = dinner.name
 
 %div
